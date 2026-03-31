@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CatFactApp.Services.Interfaces
 {
-    internal interface ICatFactService
+    public interface ICatFactService
     {
         Task<CatFactResponse?> GetCatFactAsync();
     }

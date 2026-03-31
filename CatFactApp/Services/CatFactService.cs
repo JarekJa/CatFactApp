@@ -44,7 +44,7 @@ namespace CatFactApp.Services
                 _logger.LogError(ex, "Błąd deserializacji JSON");
                 return null;
             }
-            catch (OperationCanceledException ex)
+            catch (OperationCanceledException )
             {
                 _logger.LogWarning("Operacja została anulowana");
                 return null;
