@@ -12,18 +12,19 @@ namespace CatFactApp.Services
     {
         private readonly HttpClient _httpClient;
         private readonly ILogger<CatFactService> _logger;
-        private const string EndpointUrl = "https://catfact.ninja/fact";
+        private readonly string _apiUrl;
 
-        public CatFactService(HttpClient httpClient, ILogger<CatFactService> logger)
+        public CatFactService(HttpClient httpClient, ILogger<CatFactService> logger, AppConfig config)
         {
             _httpClient = httpClient;
             _logger = logger;
+            _apiUrl = config.ApiUrl;
         }
         public async Task<CatFactResponse?> GetCatFactAsync()
         {
             try
             {
-                var response = await _httpClient.GetAsync(EndpointUrl);
+                var response = await _httpClient.GetAsync(_apiUrl);
                 response.EnsureSuccessStatusCode();
 
                 var json = await response.Content.ReadAsStringAsync();

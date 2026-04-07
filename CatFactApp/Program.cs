@@ -1,4 +1,5 @@
 ﻿using CatFactApp;
+using CatFactApp.Models;
 using CatFactApp.Services;
 using CatFactApp.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +20,15 @@ class Program
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((context, services) =>
                 {
+                    var configuration = context.Configuration;
+                    var apiUrl = configuration["ApiUrl"] ?? "https://catfact.ninja/fact";
+                    var fileName = configuration["FileName"] ?? "cat_facts.txt";
 
+                    services.AddSingleton(new AppConfig
+                    {
+                        ApiUrl = apiUrl,
+                        FileName = fileName
+                    });
                     services.AddHttpClient<ICatFactService, CatFactService>();
                     services.AddSingleton<IFileService, FileService>();
                     services.AddSingleton<CatFactApplication>();

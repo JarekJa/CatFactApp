@@ -10,10 +10,10 @@ public class FileService : IFileService
     private readonly string _filePath;
     private readonly ILogger<FileService> _logger;
 
-    public FileService(ILogger<FileService> logger)
+    public FileService(ILogger<FileService> logger, AppConfig config)
     {
         _logger = logger;
-        _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "cat_facts.txt");
+        _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, config.FileName);
     }
 
     public async Task<bool> AppendCatFactAsync(CatFactResponse catFact)
